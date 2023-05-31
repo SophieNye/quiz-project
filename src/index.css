@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600&display=swap");
 
 :root {
-  font-family: 'Lexend', sans-serif;
+  font-family: "Lexend", sans-serif;
   line-height: 1.5;
   font-weight: 500;
 }
@@ -28,7 +28,5 @@ button {
   font-family: inherit;
   cursor: pointer;
   transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
+  margin: 3px;
 }

@@ -1,6 +1,7 @@
 import { useState, Dispatch, SetStateAction } from "react";
 import { QuestionInterface } from "../App";
 import Category, { SearchParams } from "./Categories";
+import "./SelectOptions.css";
 
 interface SelectOptionsProps {
   setQuiz: Dispatch<SetStateAction<QuestionInterface[]>>;
@@ -38,7 +39,7 @@ function SelectOptions({ setQuiz }: SelectOptionsProps) {
     ],
     limit: [
       {
-        selected: false,
+        selected: true,
         value: "10",
         display: "10",
       },
@@ -58,7 +59,7 @@ function SelectOptions({ setQuiz }: SelectOptionsProps) {
         display: "40",
       },
       {
-        selected: true,
+        selected: false,
         value: "50",
         display: "50",
       },
@@ -88,7 +89,8 @@ function SelectOptions({ setQuiz }: SelectOptionsProps) {
     setQuiz(questions);
   };
   return (
-    <>
+    <div id="select-options-container">
+      <div id="instruction">Customize Your Quiz</div>
       {Object.keys(searchParams).map((param) => (
         <Category
           param={param as keyof SearchParams}
@@ -97,8 +99,8 @@ function SelectOptions({ setQuiz }: SelectOptionsProps) {
           setSearchParams={setSearchParams}
         />
       ))}
-      <button onClick={getQuestions}>Get Questions</button>
-    </>
+      <button onClick={getQuestions}>Start Quiz</button>
+    </div>
   );
 }
 

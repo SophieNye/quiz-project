@@ -20,17 +20,27 @@ function App() {
     [] as QuestionInterface[]
   );
   const [score, setScore] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
 
   return (
     <>
       <header>
-        <div id="title">
-          Quizzly
-        </div>
+        {!!quiz.length && (
+          <div id="question-count">{`${currentQuestion + 1}/${
+            quiz.length
+          }`}</div>
+        )}
+        <div id="title">Quizzly</div>
         {!!quiz.length && <div id="score">{score}</div>}
       </header>
       {quiz.length ? (
-        <Questions quiz={quiz} score={score} setScore={setScore} />
+        <Questions
+          quiz={quiz}
+          score={score}
+          setScore={setScore}
+          currentQuestion={currentQuestion}
+          setCurrentQuestion={setCurrentQuestion}
+        />
       ) : (
         <SelectOptions setQuiz={setQuiz} />
       )}

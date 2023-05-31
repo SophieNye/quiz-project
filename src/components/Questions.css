@@ -1,8 +1,29 @@
 #questions-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 95vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 95vw;
+  color: #331832;
+}
+#answers-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 85px;
+}
+
+#question-container {
+  font-size: 2rem;
+  width: 75vw;
+}
+
+button {
+  color: #331832;
+  border: none;
+}
+
+button:hover {
+  border: 1px solid #331832;
+  background-color: white;
 }

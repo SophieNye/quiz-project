@@ -1,0 +1,19 @@
+#modal-container {
+  position: absolute;
+  background-color: white;
+  border: 1px solid black;
+  height: 200px;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  transform: translate(0, -75px);
+  font-size: 1.5rem;
+  align-items: center;
+  color: #331832;
+}
+
+img {
+  height: 70px;
+  width: 70px;
+}

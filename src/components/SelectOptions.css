@@ -1,0 +1,16 @@
+#select-options-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
+}
+
+button {
+  width: 200px;
+  align-self: center;
+  color: #331832;
+}
+
+#instruction {
+  font-size: 2rem;
+}

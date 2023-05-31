@@ -1,15 +1,22 @@
 import { useState, useMemo, Dispatch, SetStateAction } from "react";
 import { QuestionInterface } from "../App";
-import './Questions.css'
+import AnsweredModal from "./AnsweredModal";
+import "./Questions.css";
 
 interface QuestionProps {
   quiz: QuestionInterface[];
   score: number;
   setScore: Dispatch<SetStateAction<number>>;
+  currentQuestion: number;
+  setCurrentQuestion: Dispatch<SetStateAction<number>>;
 }
 
-function Questions({ quiz, score, setScore }: QuestionProps) {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+function Questions({
+  quiz,
+  setScore,
+  currentQuestion,
+  setCurrentQuestion,
+}: QuestionProps) {
   const [answered, setAnswered] = useState<string | boolean>(false);
 
   const { question, correctAnswer, incorrectAnswers, difficulty } =
@@ -47,29 +54,28 @@ function Questions({ quiz, score, setScore }: QuestionProps) {
     setTimeout(() => {
       setCurrentQuestion((prev) => prev + 1);
       setAnswered(false);
-    }, 1200);
+    }, 1500);
   };
 
   return (
     <div id="questions-container">
-      {question.text}
-      <br />
-      {answers.map((answer) => {
-        return (
-          <button
-            onClick={() => {
-              setAnswered(answer.correct ? "Correct" : "Incorrect");
-              answerQuestion(answer.correct);
-            }}
-          >
-            {answer.answer}
-          </button>
-        );
-      })}
-      <br />
-      {answered && <div>{answered}</div>}
-      {answered === "Incorrect" && (
-        <div>{`Correct answer: ${correctAnswer}`}</div>
+      <div id="question-container">{question.text}</div>
+      <div id="answers-container">
+        {answers.map((answer) => {
+          return (
+            <button
+              onClick={() => {
+                setAnswered(answer.correct ? "Correct" : "Incorrect");
+                answerQuestion(answer.correct);
+              }}
+            >
+              {answer.answer}
+            </button>
+          );
+        })}
+      </div>
+      {answered && (
+        <AnsweredModal answered={answered} correctAnswer={correctAnswer} />
       )}
     </div>
   );

@@ -21,6 +21,13 @@ interface CategoryProps {
 }
 
 function Category({ param, setSearchParams, values }: CategoryProps) {
+  const categoryTitle =
+    param === "categories"
+      ? "Categories"
+      : param === "difficulties"
+      ? "Difficulty Level"
+      : "Number of Questions";
+
   const joggleParam = (el: ParamValue) => {
     const newValues = [...values];
 
@@ -38,14 +45,17 @@ function Category({ param, setSearchParams, values }: CategoryProps) {
   };
   return (
     <div className="category-section">
-      {values.map((el) => (
-        <button
-          style={{ backgroundColor: `${el.selected ? "green" : "grey"}` }}
-          onClick={() => joggleParam(el)}
-        >
-          {el.display}
-        </button>
-      ))}
+      <div id="category-title">{categoryTitle}</div>
+      <div>
+        {values.map((el) => (
+          <button
+            onClick={() => joggleParam(el)}
+            className={el.selected ? "selected" : "unselected"}
+          >
+            {el.display}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

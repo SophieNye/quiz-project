@@ -1,4 +1,33 @@
 .category-section {
-    width: 95vw;
-    border: white solid 2px;
+  width: 95vw;
+  border: white solid 2px;
+  display: flex;
+  flex-direction: column;
+}
+
+#category-title {
+  font-size: 1.5rem;
+  text-decoration: underline;
+  padding-bottom: 10px;
+}
+
+.selected {
+  background-color: #1557c0;
+  color: white;
+}
+
+.selected:hover {
+  background-color: white;
+  border: 2px solid #1557c0;
+  color: #331832;
+}
+
+.unselected {
+  background-color: #e7ecef;
+  color: #331832;
+}
+
+.unselected:hover {
+  background-color: white;
+  border: 2px solid #e7ecef;
 }
