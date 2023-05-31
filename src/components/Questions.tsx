@@ -1,30 +1,32 @@
-import { useState } from "react";
+import { useState, useMemo, Dispatch, SetStateAction } from "react";
 import { QuestionInterface } from "../App";
+import './Questions.css'
 
 interface QuestionProps {
   quiz: QuestionInterface[];
+  score: number;
+  setScore: Dispatch<SetStateAction<number>>;
 }
 
-function Questions({ quiz }: QuestionProps) {
+function Questions({ quiz, score, setScore }: QuestionProps) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [score, setScore] = useState(0);
   const [answered, setAnswered] = useState<string | boolean>(false);
 
   const { question, correctAnswer, incorrectAnswers, difficulty } =
     quiz[currentQuestion];
 
-  const answers: { answer: string; correct: boolean }[] = incorrectAnswers.map(
-    (answer) => {
+  const answers: { answer: string; correct: boolean }[] = useMemo(() => {
+    const answers = incorrectAnswers.map((answer) => {
       return { answer, correct: false };
-    }
-  );
+    });
 
-  const insertIndex = Math.floor(Math.random() * 4);
+    const insertIndex = Math.floor(Math.random() * 4);
+    answers.splice(insertIndex, 0, { answer: correctAnswer, correct: true });
 
-  answers.splice(insertIndex, 0, { answer: correctAnswer, correct: true });
+    return answers;
+  }, [correctAnswer, incorrectAnswers]);
 
   const answerQuestion = (correct: boolean) => {
-    
     if (correct) {
       setScore((prev) => {
         switch (difficulty) {
@@ -43,15 +45,13 @@ function Questions({ quiz }: QuestionProps) {
       });
     }
     setTimeout(() => {
-        setCurrentQuestion((prev) => prev + 1)
-        setAnswered(false);
-    }, 1200)
+      setCurrentQuestion((prev) => prev + 1);
+      setAnswered(false);
+    }, 1200);
   };
 
   return (
-    <>
-      {score}
-      <br />
+    <div id="questions-container">
       {question.text}
       <br />
       {answers.map((answer) => {
@@ -68,8 +68,10 @@ function Questions({ quiz }: QuestionProps) {
       })}
       <br />
       {answered && <div>{answered}</div>}
-      {answered === "Incorrect" && <div>{`Correct answer: ${correctAnswer}`}</div>}
-    </>
+      {answered === "Incorrect" && (
+        <div>{`Correct answer: ${correctAnswer}`}</div>
+      )}
+    </div>
   );
 }
 
